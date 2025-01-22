@@ -1,41 +1,57 @@
 {
   "name": "aliflang",
   "displayName": "الف",
+  "publisher": "aliflang",
   "description": "Alif lang for vs code",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "icon": "imgs/AlifLogo.png",
+  "main": "src/extension.js",
   "engines": {
     "vscode": "^1.96.0"
   },
+  "activationEvents": [],
+  "keywords": [
+    "alif",
+    "aliflang",
+    "الف"
+  ],
   "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Formatters",
     "Other"
   ],
-  "activationEvents": [],
-  "main": "./extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "Alif-Lang.helloWorld",
-        "title": "Hello World"
+        "command": "rtl-arabic.active",
+        "title": "Active RTL arabic"
+      },
+      {
+        "command": "rtl-arabic.alif",
+        "title": "RTL arabic",
+        "icon": "$(debug-step-over)"
       }
     ],
     "iconThemes": [
       {
         "id": "alif",
         "label": "Alif Icons",
-        "path": "./file-icons.json"
+        "path": "src/file-icons.json"
       }
     ],
     "languages": [
       {
         "id": "alif",
+        "aliases": [
+          "Alif",
+          "aliflib",
+          "الف"
+        ],
         "extensions": [
           ".alif",
-          ".aliflib"
-        ],
-        "aliases": [
-          "الف",
-          "alif"
+          ".aliflib",
+          ".الف"
         ],
         "configuration": "./language-configuration.json"
       }
@@ -44,7 +60,30 @@
       {
         "language": "alif",
         "scopeName": "source.alif",
-        "path": "./syntaxes/alif.tmLanguage.json"
+        "path": "./src/syntaxes/alif.tmLanguage.json"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "alif.formatDocument",
+        "key": "ctrl+shift+f",
+        "mac": "cmd+shift+f",
+        "when": "editorLangId == alif"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorLangId == alif",
+          "command": "alif.formatDocument",
+          "group": "1_modification"
+        }
+      ]
+    },
+    "snippets": [
+      {
+        "language": "alif",
+        "path": "./src/snippets/alif.json"
       }
     ]
   },
@@ -53,20 +92,8 @@
     "pretest": "npm run lint",
     "test": "vscode-test"
   },
-  "configurationDefaults": {
-    "[alif]": {
-      "editor.direction": "rtl",
-      "editor.wordWrap": "on",
-      "editor.autoClosingBrackets": "always",
-      "editor.autoIndent": "advanced"
-    }
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.96.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "20.x",
-    "eslint": "^9.16.0",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iskepr/AlifExtension.git"
   }
 }

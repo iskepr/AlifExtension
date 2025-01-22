@@ -1,65 +1,53 @@
-# Alif-Lang README
+# السلام عليكم
+هذه إضافة VS Code للغة برمجة "الف"، وهي تهدف إلى تحسين تجربة البرمجة مع اللغة من خلال تلوين النصوص، الاختصارات، والتنظيم التلقائي للشفرة.
 
-This is the README for your extension "Alif-Lang". After writing up a brief description, we recommend including the following sections.
+## كيفية التطوير
 
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
+#### 1. **ملف `src/syntaxes/alif.tmLanguage.json`**
+   هذا الملف هو المسؤول عن تلوين النصوص (Syntax Highlighting) في VS Code. يقوم بتعريف المتغيرات، الدوال، الهياكل البرمجية، وغيرها من العناصر البرمجية. يتم استخدام تنسيق `tmLanguage` لتحديد النمط الذي سيتم تطبيقه على الشفرة.
+   
+   - **المحتوى**: 
+     يحتوي هذا الملف على تعريفات للألوان والأنماط المستخدمة لتمييز الكلمات الرئيسية، المتغيرات، الدوال، التعليقات، والمزيد.
+   - **كيف يعمل**:
+     يقوم VS Code باستخدام هذه التعريفات لتمييز أجزاء الشفرة أثناء الكتابة، مما يساعد المبرمج على فهم بنية الكود بسهولة أكبر.
+   
+#### 2. **ملف `src/snippets/alif.json`**
+   هذا الملف يحدد **الاختصارات التلقائية** (Snippets) التي يمكن استخدامها لكتابة أجزاء من الكود بسرعة.
+   
+   - **المحتوى**: 
+     يحتوي هذا الملف على اختصارات مختلفة يتم تفعيلها عند كتابة جزء من الكلمة أو الحروف الأولى.
+   - **مثال**:
+     عند كتابة "دا" ثم الضغط على "Enter"، سيكتمل النص إلى:
+     ```alif
+     دالة اسم_الدالة(المعاملات):
+     ```
+     يمكن إضافة اختصارات أخرى لمختلف أجزاء اللغة لتسريع الكتابة وتوفير الوقت.
+   
+#### 3. **ملف `src/extension.js`**
+   هذا الملف مسؤول عن العديد من المهام التنظيمية مثل **تنسيق الشفرة** (Code Formatting) وضبط المسافات البيضاء (Whitespace Formatting).
+   
+   - **المحتوى**:
+     يحتوي على منطق يحسن تنسيق الشفرة بحيث يصبح الكود أكثر وضوحًا وسهولة في القراءة. على سبيل المثال، يقوم بإزالة الفراغات الزائدة، وضبط المسافات بين الأسطر، وضمان التناسق في تنسيق الأوامر.
+   - **كيف يعمل**:
+     يعمل هذا الملف على تنفيذ الوظائف عندما يكتب المستخدم أو يضغط على اختصار، مما يحسن سرعة الكتابة والتطوير بشكل عام.
+   
 ---
 
-## Working with Markdown
+### كيفية تثبيت الإضافة محلياً
 
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+1. قم بتحميل الكود المصدر للمشروع من مستودع GitHub.
+2. افتح المجلد في VS Code.
+3. افتح الـ **Terminal** في VS Code.
+4. قم بتثبيت الإضافة عن طريق تنفيذ الأمر التالي:
+```
+npm install
+```
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
+5. اضغط `F5` في لوحة المفاتيح ستفتح نافذة جديدة اضف التعديلات وارفع المشروع علي مستودع GitHub.
+5. بعد الانتهاء من التثبيت، يمكنك فتح أي ملف `.alif` وسيتم تطبيق التلوين التلقائي والاختصارات.
 
-## For more information
+## ملاحظات إضافية
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- تأكد من أنك تستخدم آخر إصدار من VS Code لضمان توافق الإضافة بشكل كامل.
+- يمكن تعديل إعدادات الإضافة لتناسب احتياجاتك الخاصة عبر ملف الإعدادات `settings.json`.
+- إذا واجهت أي مشكلة أو كان لديك اقتراحات، لا تتردد في فتح Issue على صفحة GitHub الخاصة بالمشروع.

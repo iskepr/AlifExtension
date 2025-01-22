@@ -1,10 +1,10 @@
 {
   "iconDefinitions": {
     "_file": {
-      "iconPath": "imgs/AlifLogo.png"
+      "iconPath": "../imgs/AlifLogo.svg"
     },
     "_otherFile": {
-      "iconPath": "imgs/fileIcon.svg"
+      "iconPath": "../imgs/fileIcon.svg"
     }
   },
   "fileExtensions": {

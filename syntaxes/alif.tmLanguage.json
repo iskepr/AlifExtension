@@ -1,0 +1,61 @@
+{
+  "name": "Alif",
+  "fileTypes": ["alif"],
+  "scopeName": "source.alif",
+  "patterns": [
+    {
+      "name": "comment.line.number-sign.alif",
+      "begin": "#",
+      "end": "$",
+      "contentName": "comment.line.alif"
+    },
+    {
+      "name": "keyword.control.alif",
+      "match": "\\b(دالة|اذا|استورد|ارجع|اطبع|بينما|لاجل|استمر|توقف|احذف|اواذا|والا|صحيح|عشري)\\b"
+    },
+    {
+      "name": "constant.language.alif",
+      "match": "\\b(صح|خطأ|عدم)\\b"
+    },
+    {
+      "name": "string.quoted.formatted.alif",
+      "begin": "م\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "meta.embedded.line.alif",
+          "begin": "\\{",
+          "end": "\\}",
+          "patterns": [
+            {"include": "source.alif"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.double.alif",
+      "begin": "\"",
+      "end": "\""
+    },
+    {
+      "name": "constant.numeric.alif",
+      "match": "-?\\b\\d+(\\.\\d+)?\\b"
+    },
+    {
+      "name": "keyword.operator.alif",
+      "match": "\\+\\+=?|\\-\\-=?|\\*=|/=|\\^=|\\\\=|==|!=|<=|>=|<|>|\\\\|\\+|-|\\*|/|\\^|=|و|او|\\bليس\\b"
+    },
+    {
+      "name": "support.function.builtin.alif",
+      "match": "\\b(مدى|صحيح|عشري|ادخل|نوع|طول|نص)\\b"
+    },
+    {
+      "name": "entity.name.function.alif",
+      "match": "\\b(هل_اولي|تتبع_سقوط_الكرة|معادلة_تربيعية|السرعة|مح_المخروطين)\\b"
+    },
+    {
+      "name": "variable.other.alif",
+      "match": "\\b[أ-ي]+_[أ-ي]+\\b"
+    }
+  ]
+}

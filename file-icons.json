@@ -1,0 +1,16 @@
+{
+  "iconDefinitions": {
+    "_file": {
+      "iconPath": "imgs/AlifLogo.png"
+    },
+    "_otherFile": {
+      "iconPath": "imgs/fileIcon.svg"
+    }
+  },
+  "fileExtensions": {
+    "alif": "_file"
+  },
+  "languageIds": {
+    "alif": "_file"
+  }
+}

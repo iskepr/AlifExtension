@@ -1,0 +1,72 @@
+{
+  "name": "aliflang",
+  "displayName": "الف",
+  "description": "Alif lang for vs code",
+  "version": "0.0.1",
+  "icon": "imgs/AlifLogo.png",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "Alif-Lang.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "alif",
+        "label": "Alif Icons",
+        "path": "./file-icons.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "alif",
+        "extensions": [
+          ".alif",
+          ".aliflib"
+        ],
+        "aliases": [
+          "الف",
+          "alif"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "alif",
+        "scopeName": "source.alif",
+        "path": "./syntaxes/alif.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "configurationDefaults": {
+    "[alif]": {
+      "editor.direction": "rtl",
+      "editor.wordWrap": "on",
+      "editor.autoClosingBrackets": "always",
+      "editor.autoIndent": "advanced"
+    }
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.96.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "eslint": "^9.16.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "aliflang",
   "displayName": "الف",
-  "publisher": "aliflang",
+  "publisher": "skepr",
   "description": "Alif lang for vs code",
   "version": "0.1.0",
   "icon": "imgs/AlifLogo.png",

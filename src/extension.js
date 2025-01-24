@@ -1,165 +1,204 @@
-const vscode = require('vscode');
+const vscode = require("vscode");
 
 function activate(context) {
-    // Print debug message when a .alif file is opened
-    context.subscriptions.push(
-        vscode.workspace.onDidOpenTextDocument(document => {
-            if (document.languageId === 'alif') {
-                console.log('alif run');
-            }
-        })
-    );
+  const diagnosticCollection =
+    vscode.languages.createDiagnosticCollection("alif");
 
-    // Register hover provider
-    context.subscriptions.push(
-        vscode.languages.registerHoverProvider('alif', {
-            provideHover(document, position) {
-                const wordRange = document.getWordRangeAtPosition(position);
-                const word = document.getText(wordRange);
+  // دالة تعرض شرحًا للكلمة تحت المؤشر
+  context.subscriptions.push(
+    vscode.languages.registerHoverProvider("alif", {
+      provideHover(document, position) {
+        const wordRange = document.getWordRangeAtPosition(position);
+        const word = document.getText(wordRange);
 
-                const hoverContent = getHoverContent(word);
-                if (hoverContent) {
-                    return new vscode.Hover(hoverContent);
-                }
-            }
-        })
-    );
-
-    // Register format command
-    let formatCommand = vscode.commands.registerCommand('alif.formatDocument', () => {
-        const editor = vscode.window.activeTextEditor;
-        if (editor && editor.document.languageId === 'alif') {
-            const document = editor.document;
-            const text = document.getText();
-            const lines = text.split(/\r?\n/);
-            let formattedLines = [];
-
-            for (let line of lines) {
-                // Format operators with spaces
-                line = line
-                    // Arithmetic operators
-                    .replace(/([+\-*/\\^])/g, ' $1 ')
-                    // Comparison operators
-                    .replace(/(==|!=|<=|>=|<|>)/g, ' $1 ')
-                    // Logical operators
-                    .replace(/\b(و|او|ليس)\b/g, ' $1 ')
-                    // Assignment operators
-                    .replace(/([\+\-\*\/\\^]=)/g, ' $1 ')
-                    // Clean up multiple spaces
-                    .replace(/\s+/g, ' ')
-                    .trim();
-
-                formattedLines.push(line);
-            }
-
-            const edit = new vscode.WorkspaceEdit();
-            const range = new vscode.Range(
-                new vscode.Position(0, 0),
-                new vscode.Position(document.lineCount - 1, document.lineAt(document.lineCount - 1).text.length)
-            );
-            edit.replace(document.uri, range, formattedLines.join('\n'));
-            vscode.workspace.applyEdit(edit);
+        const hoverContent = getHoverContent(word);
+        if (hoverContent) {
+          return new vscode.Hover(hoverContent);
         }
-    });
+      },
+    })
+  );
 
-    context.subscriptions.push(formatCommand);
-
-    // Register the formatter
-    context.subscriptions.push(
-        vscode.languages.registerDocumentFormattingEditProvider('alif', {
-            provideDocumentFormattingEdits(document) {
-                const edits = [];
-                const text = document.getText();
-                const lines = text.split(/\r?\n/);
-                let indentLevel = 0;
-                const formattedLines = [];
-
-                for (let i = 0; i < lines.length; i++) {
-                    let line = lines[i].trim();
-                    
-                    // Skip empty lines
-                    if (!line) {
-                        formattedLines.push('');
-                        continue;
-                    }
-
-                    // Decrease indent for else statements
-                    if (line.startsWith('والا') || line.startsWith('اواذا')) {
-                        indentLevel = Math.max(0, indentLevel - 1);
-                    }
-
-                    // Add proper indentation
-                    const indent = '    '.repeat(indentLevel);
-                    
-                    // Format operators with spaces
-                    line = line
-                        // Arithmetic operators
-                        .replace(/([+\-*/\\^])/g, ' $1 ')
-                        // Comparison operators
-                        .replace(/(==|!=|<=|>=|<|>)/g, ' $1 ')
-                        // Logical operators
-                        .replace(/\b(و|او|ليس)\b/g, ' $1 ')
-                        // Assignment operators
-                        .replace(/([\+\-\*\/\\^]=)/g, ' $1 ')
-                        // Clean up multiple spaces
-                        .replace(/\s+/g, ' ')
-                        .trim();
-
-                    // Add proper spacing around colons
-                    if (line.endsWith(':')) {
-                        line = line.slice(0, -1) + ': ';
-                    }
-
-                    // Format comments
-                    if (line.includes('#')) {
-                        const [code, comment] = line.split('#');
-                        line = code.trim() + (code.trim() ? ' ' : '') + '#' + comment;
-                    }
-
-                    formattedLines.push(indent + line);
-
-                    // Increase indent after lines ending with colon
-                    if (line.endsWith(': ')) {
-                        indentLevel++;
-                    }
-                }
-
-                const start = new vscode.Position(0, 0);
-                const end = new vscode.Position(document.lineCount - 1, document.lineAt(document.lineCount - 1).text.length);
-                const range = new vscode.Range(start, end);
-                
-                edits.push(new vscode.TextEdit(range, formattedLines.join('\n')));
-                return edits;
-            }
-        })
-    );
-
-    // Print debug message when debugging starts
-    context.subscriptions.push(
-        vscode.debug.onDidStartDebugSession(() => {
-            console.log('alif run');
-        })
-    );
-}
-
-function getHoverContent(word) {
+  function getHoverContent(word) {
     const documentation = {
-        'اطبع': 'دالة للطباعة على الشاشة\n\nمثال:\nاطبع("مرحبا")',
-        'ادخل': 'دالة لقراءة مدخلات المستخدم\n\nمثال:\nاسم = ادخل("ادخل اسمك: ")',
-        'مدى': 'دالة تنشئ تسلسل من الأرقام\n\nمثال:\nلاجل س في مدى(5):\n    اطبع(س)',
-        'طول': 'دالة تحسب طول النص أو القائمة\n\nمثال:\nنص = "مرحبا"\nاطبع(طول(نص))',
-        'نوع': 'دالة تعيد نوع المتغير\n\nمثال:\nاطبع(نوع(5))',
-        'صحيح': 'دالة تحول النص إلى رقم صحيح\n\nمثال:\nرقم = صحيح("123")',
-        'عشري': 'دالة تحول النص إلى رقم عشري\n\nمثال:\nرقم = عشري("12.34")',
-        'نص': 'دالة تحول القيمة إلى نص\n\nمثال:\nاطبع(نص(123))'
+      اطبع: 'دالة للطباعة على الشاشة\n\nمثال:\nاطبع("مرحبا")',
+      ادخل: 'دالة لقراءة مدخلات المستخدم\n\nمثال:\nاسم = ادخل("ادخل اسمك: ")',
+      مدى: "دالة تنشئ تسلسل من الأرقام\n\nمثال:\nلاجل س في مدى(5):\n    اطبع(س)",
+      طول: 'دالة تحسب طول النص أو القائمة\n\nمثال:\nنص = "مرحبا"\nاطبع(طول(نص))',
+      نوع: "دالة تعيد نوع المتغير\n\nمثال:\nاطبع(نوع(5))",
+      صحيح: 'دالة تحول النص إلى رقم صحيح\n\nمثال:\nرقم = صحيح("123")',
+      عشري: 'دالة تحول النص إلى رقم عشري\n\nمثال:\nرقم = عشري("12.34")',
+      نص: "دالة تحول القيمة إلى نص\n\nمثال:\nاطبع(نص(123))",
     };
 
     return documentation[word];
+  }
+
+  // دالة لتنسيق الكود
+  context.subscriptions.push(
+    vscode.languages.registerDocumentFormattingEditProvider("alif", {
+      provideDocumentFormattingEdits(document) {
+        const edits = [];
+        const text = document.getText();
+        const lines = text.split(/\r?\n/);
+        const spaces = "    ";
+        const formattedLines = [];
+
+        for (let i = 0; i < lines.length; i++) {
+          const currentLine = document.lineAt(i);
+          const trimmedLine = currentLine.text.trimEnd();
+          let formattedLine = trimmedLine;
+          
+          // معالجة السطر التالي بشكل آمن
+          const nextLine = i < lines.length - 1 ? document.lineAt(i + 1) : null;
+
+          // التحقق من وجود ":" في السطر الحالي مع التأكد أنها ليست داخل النصوص أو مصفوفة
+          if (
+            currentLine.text.trim().endsWith(":") &&
+            !/^\s*{.*:.*}$/.test(currentLine.text) && // تجاهل السطر إذا كان مصفوفة
+            nextLine &&
+            !nextLine.text.startsWith(spaces)
+          ) {
+            const edit = vscode.TextEdit.insert(nextLine.range.start, spaces);
+            edits.push(edit);
+          }
+
+          // تخطي السطور الفارغة المتكررة
+          if (!trimmedLine) {
+            if (
+              formattedLines.length === 0 ||
+              formattedLines[formattedLines.length - 1] !== ""
+            ) {
+              formattedLines.push("");
+            }
+            continue;
+          }
+
+          // إضافة مسافة قبل السطور التي تبدأ بـ "ارجاع" أو "استمر"
+          if (
+            formattedLine.startsWith("ارجاع") ||
+            formattedLine.startsWith("استمر")
+          ) {
+            formattedLine = spaces + formattedLine;
+          }
+
+          // تنسيق السطور التي تحتوي على ":"
+          if (formattedLine.includes(":")) {
+            const lineWithoutComments = formattedLine.replace(/#.*/, "");
+
+            const colonOutsideQuotesRegex = /:(?=(?:[^"']*"[^"']*")*[^"']*$)/;
+            if (
+              colonOutsideQuotesRegex.test(lineWithoutComments) &&
+              !lineWithoutComments.endsWith(":")
+            ) {
+              formattedLine = lineWithoutComments.replace(
+                colonOutsideQuotesRegex,
+                `:\n${spaces}`
+              );
+            }
+          }
+
+          formattedLines.push(formattedLine);
+        }
+
+        // إنشاء التعديل النهائي للنص بالكامل
+        const start = new vscode.Position(0, 0);
+        const end = new vscode.Position(
+          document.lineCount - 1,
+          document.lineAt(document.lineCount - 1).text.length
+        );
+        const range = new vscode.Range(start, end);
+
+        edits.push(new vscode.TextEdit(range, formattedLines.join("\n")));
+        return edits;
+      },
+    })
+  );
+
+  // استمع لتغييرات المستند لاكتشاف الأخطاء
+  vscode.workspace.onDidChangeTextDocument((event) => {
+    if (event.document.languageId === "alif") {
+      updateDiagnostics(event.document, diagnosticCollection);
+    }
+  });
+
+  vscode.workspace.onDidOpenTextDocument((document) => {
+    if (document.languageId === "alif") {
+      updateDiagnostics(document, diagnosticCollection);
+    }
+  });
+
+  context.subscriptions.push(diagnosticCollection);
+
+  // وظيفة لتحديث الأخطاء
+  function updateDiagnostics(document, diagnosticCollection) {
+    const diagnostics = [];
+    const lines = document.getText().split(/\r?\n/);
+
+    lines.forEach((line, i) => {
+      const lineWithoutComments = line.replace(/#.*/, "");
+      const lineWithoutStrings = lineWithoutComments.replace(
+        /(["'])(?:(?=(\\?))\2.)*?\1/g,
+        ""
+      );
+      const colonCount = (lineWithoutStrings.match(/:/g) || []).length;
+
+      // التحقق من وجود أكثر من علامة ":" في السطر
+      if (colonCount > 1) {
+        diagnostics.push(
+          createDiagnostic(
+            i,
+            0,
+            i,
+            line.length,
+            "تم اكتشاف خطأ: لا يُسمح بوجود أكثر من علامتين ':' خارج النصوص والتعليقات في نفس السطر."
+          )
+        );
+      }
+
+      // التحقق من السطر التالي
+      if (i + 1 < lines.length) {
+        const nextLine = lines[i + 1];
+        const processedLine = lineWithoutStrings.trim();
+
+        // إذا كان السطر الحالي ينتهي بـ ":" بعد إزالة المسافات والتعليقات والنصوص
+        if (processedLine.endsWith(":")) {
+          const currentLineSpaces = line.length - line.trimStart().length;
+          const requiredSpaces = currentLineSpaces + 2;
+          const nextLineSpaces = nextLine.length - nextLine.trimStart().length;
+
+          // التحقق من أن السطر التالي يحتوي على المسافات المطلوبة
+          if (nextLineSpaces < requiredSpaces) {
+            diagnostics.push(
+              createDiagnostic(
+                i + 1,
+                0,
+                i + 1,
+                nextLine.length,
+                `خطأ: السطر يجب أن يحتوي على ${requiredSpaces} مسافة في البداية`
+              )
+            );
+          }
+        }
+      }
+    });
+
+    diagnosticCollection.set(document.uri, diagnostics);
+  }
+
+  // وظيفة مساعدة لإنشاء التشخيصات
+  function createDiagnostic(lineStart, charStart, lineEnd, charEnd, message) {
+    return new vscode.Diagnostic(
+      new vscode.Range(lineStart, charStart, lineEnd, charEnd),
+      message,
+      vscode.DiagnosticSeverity.Error
+    );
+  }
 }
 
 function deactivate() {}
 
 module.exports = {
-    activate,
-    deactivate
+  activate,
+  deactivate,
 };

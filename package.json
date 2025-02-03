@@ -3,7 +3,7 @@
   "displayName": "الف",
   "publisher": "skepr",
   "description": "Alif lang for vs code",
-  "version": "0.1.0",
+  "version": "0.3.1",
   "icon": "imgs/AlifLogo.png",
   "main": "src/extension.js",
   "engines": {
@@ -19,7 +19,9 @@
     "Programming Languages",
     "Snippets",
     "Formatters",
-    "Other"
+    "Debuggers",
+    "Linters",
+    "Themes"
   ],
   "contributes": {
     "commands": [
@@ -31,6 +33,35 @@
         "command": "rtl-arabic.alif",
         "title": "RTL arabic",
         "icon": "$(debug-step-over)"
+      },
+      {
+        "command": "alif.runCode",
+        "title": "تشغيل الف"
+      },
+      {
+        "command": "alif.formatDocument",
+        "title": "Format Alif Document"
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "alif-debug",
+        "label": "Debug Alif Script",
+        "program": "${file}",
+        "runtime": "alif",
+        "configurationAttributes": {
+          "launch": {
+            "required": [
+              "program"
+            ],
+            "properties": {
+              "program": {
+                "type": "string",
+                "description": "Path to the Alif script to debug"
+              }
+            }
+          }
+        }
       }
     ],
     "iconThemes": [
@@ -65,18 +96,25 @@
     ],
     "keybindings": [
       {
-        "command": "alif.formatDocument",
-        "key": "ctrl+shift+f",
-        "mac": "cmd+shift+f",
+        "command": "alif.runCode",
+        "key": "alt+shift+r",
+        "mac": "alt+shift+r",
         "when": "editorLangId == alif"
       }
     ],
     "menus": {
+      "editor/title/run": [
+        {
+          "command": "alif.runCode",
+          "when": "editorLangId == alif",
+          "group": "navigation"
+        }
+      ],
       "editor/context": [
         {
+          "command": "alif.runCode",
           "when": "editorLangId == alif",
-          "command": "alif.formatDocument",
-          "group": "1_modification"
+          "group": "navigation"
         }
       ]
     },

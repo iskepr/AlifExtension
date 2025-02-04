@@ -57,7 +57,7 @@ function registerFormatter() {
           ) {
             formattedLine = lineWithoutComments.replace(
               colonOutsideQuotesRegex,
-              ":\n${spaces}"
+              `:\n${spaces}`
             );
           }
         }

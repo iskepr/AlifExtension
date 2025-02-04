@@ -2,14 +2,16 @@
   "name": "aliflang",
   "displayName": "الف",
   "publisher": "skepr",
-  "description": "Alif lang for vs code",
-  "version": "0.3.1",
+  "description": "إضافة للغة الف مُنظمة للشفرة و مُشغلة لها و تختصر وقت الكتابة",
+  "version": "0.5.2",
   "icon": "imgs/AlifLogo.png",
   "main": "src/extension.js",
   "engines": {
     "vscode": "^1.96.0"
   },
-  "activationEvents": [],
+  "activationEvents": [
+    "onDebug"
+  ],
   "keywords": [
     "alif",
     "aliflang",
@@ -26,42 +28,27 @@
   "contributes": {
     "commands": [
       {
-        "command": "rtl-arabic.active",
-        "title": "Active RTL arabic"
+        "command": "alif.runCode",
+        "title": "تشغيل الف",
+        "icon": "$(run)"
       },
       {
-        "command": "rtl-arabic.alif",
-        "title": "RTL arabic",
+        "command": "rtl-alif.active",
+        "title": "تفعيل من اليمين لليسار"
+      },
+      {
+        "command": "rtl-alif.deactive",
+        "title": "إلغاء تفعيل من اليمين لليسار"
+      },
+      {
+        "command": "rtl-alif.rtl",
+        "title": "من اليمين لليسار",
         "icon": "$(debug-step-over)"
       },
       {
-        "command": "alif.runCode",
-        "title": "تشغيل الف"
-      },
-      {
-        "command": "alif.formatDocument",
-        "title": "Format Alif Document"
-      }
-    ],
-    "debuggers": [
-      {
-        "type": "alif-debug",
-        "label": "Debug Alif Script",
-        "program": "${file}",
-        "runtime": "alif",
-        "configurationAttributes": {
-          "launch": {
-            "required": [
-              "program"
-            ],
-            "properties": {
-              "program": {
-                "type": "string",
-                "description": "Path to the Alif script to debug"
-              }
-            }
-          }
-        }
+        "command": "rtl-alif.ltr",
+        "title": "من اليسار لليمين",
+        "icon": "$(debug-step-back)"
       }
     ],
     "iconThemes": [
@@ -116,6 +103,18 @@
           "when": "editorLangId == alif",
           "group": "navigation"
         }
+      ],
+      "editor/title": [
+        {
+          "when": "resourceLangId == alif && resourceFilename =~ /^(?:.*(\\.rtl\\.alif)).*$/",
+          "command": "rtl-alif.ltr",
+          "group": "1_run"
+        },
+        {
+          "when": "resourceLangId == alif && resourceFilename =~ /^(?!.*(\\.rtl\\.alif)).*$/",
+          "command": "rtl-alif.rtl",
+          "group": "1_run"
+        }
       ]
     },
     "snippets": [
@@ -123,6 +122,18 @@
         "language": "alif",
         "path": "./src/snippets/alif.json"
       }
+    ],
+    "configurationDefaults": {
+      "[alif]": {
+        "editor.minimap.enabled": false
+      }
+    },
+    "alif.previewStyles": [
+      "./src/style/preview.css",
+      "./src/style/github.css"
+    ],
+    "alif.previewScripts": [
+      "./src/script/preview.js"
     ]
   },
   "scripts": {
@@ -133,5 +144,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/iskepr/AlifExtension.git"
+  },
+  "dependencies": {
+    "sudo-prompt": "^9.2.1"
   }
 }

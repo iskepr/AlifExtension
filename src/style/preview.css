@@ -1,0 +1,100 @@
+body {
+    background: white;
+}
+
+.vscode-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid transparent;
+}
+
+.vscode-body.vscode-body--rtl {
+    direction: rtl;
+}
+
+.vscode-body blockquote {
+    background-color: initial;
+}
+
+.vscode-body pre {
+    color: initial;
+    background: #f7f7f7 !important;
+}
+
+.vscode-body code {
+    color: inherit;
+}
+
+.vscode-body pre code {
+    color: initial;
+}
+
+.vscode-body code>div {
+    background: none;
+}
+
+.vscode-body table th,
+.vscode-body table td {
+    border: 1px solid #ddd !important;
+}
+
+.vscode-body.showEditorSelection .code-active-line:before {
+    border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-body.showEditorSelection .code-line:hover:before {
+    border-left: 3px solid rgba(0, 0, 0, 0.4);
+}
+
+.vscode-body.showEditorSelection .code-line .code-line:hover:before {
+    border-left: none;
+}
+
+.vscode-body p,
+.vscode-body blockquote,
+.vscode-body ul,
+.vscode-body ol,
+.vscode-body dl,
+.vscode-body table,
+.vscode-body pre {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+body.vscode-body::-webkit-scrollbar {
+    background-color: white;
+}
+
+body.vscode-body::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.4);
+}
+
+body.vscode-body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(100, 100, 100, 0.7);
+}
+
+.vscode-body.vscode-body--rtl ul,
+.vscode-body.vscode-body--rtl ol {
+    padding-right: 2em;
+    padding-left: 0;
+}
+
+.vscode-body.vscode-body--rtl li {
+    text-align: right;
+}
+
+.vscode-body.vscode-body--rtl li>p {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.vscode-body.vscode-body--rtl ul ul,
+.vscode-body.vscode-body--rtl ul ol,
+.vscode-body.vscode-body--rtl ol ul,
+.vscode-body.vscode-body--rtl ol ol {
+    margin-right: 2em;
+    margin-left: 0;
+}

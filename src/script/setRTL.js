@@ -45,7 +45,7 @@ const toggleRTL = (activate) => {
       .showInformationMessage(
         `"RTL alif" ${activate ? "تفعيل" : "إلغاء التفعيل"}؟`,
         "مسؤول",
-        "عادي"
+        "إالغاء"
       )
       .then((as) => {
         if (as) {

@@ -36,6 +36,11 @@
       "end": "\""
     },
     {
+      "name": "string.quoted.single.alif",
+      "begin": "'",
+      "end": "'"
+    },
+    {
       "name": "constant.numeric.alif",
       "match": "-?\\b\\d+(\\.\\d+)?\\b"
     },

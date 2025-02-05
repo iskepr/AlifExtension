@@ -3,11 +3,11 @@
   "displayName": "الف",
   "publisher": "skepr",
   "description": "إضافة للغة الف مُنظمة للشفرة و مُشغلة لها و تختصر وقت الكتابة",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "icon": "imgs/AlifLogo.png",
   "main": "src/extension.js",
   "engines": {
-    "vscode": "^1.96.0"
+    "vscode": "^1.50.0"
   },
   "activationEvents": [
     "onDebug"
@@ -55,7 +55,7 @@
       {
         "id": "alif",
         "label": "Alif Icons",
-        "path": "src/file-icons.json"
+        "path": "src/fileIcons.json"
       }
     ],
     "languages": [

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<NotepadPlus>
+    <LexerStyles>
+        <LexerType name="Alif" desc="Alif" ext="alif aliflib">
+            <WordsStyle name="PREPROCESSOR" styleID="9" fgColor="FF79C6" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="DEFAULT" styleID="11" fgColor="F8F8F2" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="INSTRUCTION WORD" styleID="5" fgColor="FF79C6" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" keywordClass="instre1">@Override @SuppressWarnings @SafeVarargs @FunctionalInterface @Retention @Documented @Target @Inherited @Repeatable @Deprecated</WordsStyle>
+            <WordsStyle name="TYPE WORD" styleID="16" fgColor="FF79C6" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="NUMBER" styleID="4" fgColor="BD93F9" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="STRING" styleID="6" fgColor="F1FA8C" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="CHARACTER" styleID="7" fgColor="F1FA8C" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="OPERATOR" styleID="10" fgColor="F8F8F2" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="VERBATIM" styleID="13" fgColor="F1FA8C" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="REGEX" styleID="14" fgColor="F1FA8C" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="COMMENT" styleID="1" fgColor="6272A4" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="COMMENT LINE" styleID="2" fgColor="6272A4" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="COMMENT DOC" styleID="3" fgColor="6272A4" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="COMMENT LINE DOC" styleID="15" fgColor="6272A4" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="COMMENT DOC KEYWORD" styleID="17" fgColor="6272A4" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+            <WordsStyle name="COMMENT DOC KEYWORD ERROR" styleID="18" fgColor="6272A4" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+        </LexerType>
+    </LexerStyles>
+    <GlobalStyles>
+        <!-- Attention : Don't modify the name of styleID="0" -->
+        <WidgetStyle name="Global override" styleID="0" fgColor="F8F8F2" bgColor="0a0e14" fontName="Consolas" fontStyle="0" fontSize="10" />
+        <WidgetStyle name="Default Style" styleID="32" fgColor="F8F8F2" bgColor="0a0e14" fontName="Consolas" fontStyle="0" fontSize="10" />
+        <WidgetStyle name="Indent guideline style" styleID="37" fgColor="6272A4" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+        <WidgetStyle name="Brace highlight style" styleID="34" fgColor="F8F8F2" bgColor="BD93F9" fontName="" fontStyle="1" fontSize="10" />
+        <WidgetStyle name="Bad brace colour" styleID="35" fgColor="F8F8F2" bgColor="FF5555" fontName="" fontStyle="0" fontSize="" />
+        <WidgetStyle name="Current line background colour" styleID="0" bgColor="2F3142" fgColor="F8F8F2" fontSize="" fontStyle="0" />
+        <WidgetStyle name="Selected text colour" styleID="0" bgColor="44475A" fgColor="F8F8F2" fontStyle="0" />
+        <WidgetStyle name="Caret colour" styleID="2069" fgColor="F8F8F2" bgColor="0a0e14" fontStyle="0" />
+        <WidgetStyle name="Edge colour" styleID="0" fgColor="F8F8F2" bgColor="0a0e14" fontSize="" fontStyle="0" />
+        <WidgetStyle name="Line number margin" styleID="33" fgColor="BD93F9" bgColor="0a0e14" fontName="" fontStyle="0" fontSize="" />
+        <WidgetStyle name="Fold" styleID="0" fgColor="BD93F9" bgColor="0a0e14" fontStyle="0" fontSize="" />
+        <WidgetStyle name="Fold active" styleID="0" fgColor="BD93F9" fontStyle="0" fontSize="" bgColor="0a0e14" />
+        <WidgetStyle name="Fold margin" styleID="0" fgColor="0a0e14" bgColor="0a0e14" fontStyle="0" fontSize="" />
+        <WidgetStyle name="White space symbol" styleID="0" fgColor="6272A4" bgColor="0a0e14" fontStyle="0" fontSize="" />
+        <WidgetStyle name="URL hovered" styleID="0" fgColor="50FA7B" bgColor="0a0e14" fontStyle="0" />
+        <WidgetStyle name="Tags attribute" styleID="26" bgColor="0a0e14" fgColor="F8F8F2" fontStyle="0" />
+        <WidgetStyle name="Tags match highlighting" styleID="27" bgColor="BD93F9" fgColor="0a0e14" fontStyle="0" />
+        <WidgetStyle name="Smart HighLighting" styleID="29" bgColor="8BE9FD" fgColor="F8F8F2" fontSize="" fontStyle="1" />
+        <WidgetStyle name="Active tab focused indicator" styleID="0" fgColor="FF5555" fontStyle="0" />
+    </GlobalStyles>
+</NotepadPlus>

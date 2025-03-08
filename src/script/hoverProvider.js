@@ -11,7 +11,7 @@ function registerHoverProvider() {
           new vscode.MarkdownString(
             `**فائدة امر ${word}**
             \n\n${hoverContent}
-            \n\n[📖 المزيد من المعلومات](https://aliflang.org/docs#${word})`
+            \n\n[📖 المزيد من المعلومات](https://aliflang.org/Docs.html#${word})`
           )
         );
       }

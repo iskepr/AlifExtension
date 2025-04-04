@@ -11,10 +11,14 @@ function registerRunCommand() {
 
     const filePath = editor.document.fileName;
     const fileName = path.basename(filePath);
-    const terminal = vscode.window.createTerminal("Alif Debugger");
+    let terminal = vscode.window.terminals.find(t => t.name === "Alif Debugger");
+    if (!terminal) {
+      terminal = vscode.window.createTerminal("Alif Debugger");
+    }
     terminal.show();
-    terminal.sendText(`alif "${fileName}"`);
+    terminal.sendText(`alif ${filePath}`);
   });
 }
+
 
 module.exports = registerRunCommand;

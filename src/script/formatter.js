@@ -16,17 +16,6 @@ function registerFormatter() {
         // معالجة السطر التالي بشكل آمن
         const nextLine = i < lines.length - 1 ? document.lineAt(i + 1) : null;
 
-        // التحقق من وجود ":" في السطر الحالي مع التأكد أنها ليست داخل النصوص أو مصفوفة
-        if (
-          currentLine.text.trim().endsWith(":") &&
-          !/^\s*{.*:.*}$/.test(currentLine.text) && // تجاهل السطر إذا كان مصفوفة
-          nextLine &&
-          !nextLine.text.startsWith(spaces)
-        ) {
-          const edit = vscode.TextEdit.insert(nextLine.range.start, spaces);
-          edits.push(edit);
-        }
-
         // تخطي السطور الفارغة المتكررة
         if (!trimmedLine) {
           if (
@@ -45,23 +34,6 @@ function registerFormatter() {
         ) {
           formattedLine = spaces + formattedLine;
         }
-
-        // تنسيق السطور التي تحتوي على ":"
-        if (formattedLine.includes(":")) {
-          const lineWithoutComments = formattedLine.replace(/#.*/, "");
-
-          const colonOutsideQuotesRegex = /:(?=(?:[^"']*"[^"']*")*[^"']*$)/;
-          if (
-            colonOutsideQuotesRegex.test(lineWithoutComments) &&
-            !lineWithoutComments.endsWith(":")
-          ) {
-            formattedLine = lineWithoutComments.replace(
-              colonOutsideQuotesRegex,
-              `:\n${spaces}`
-            );
-          }
-        }
-
         formattedLines.push(formattedLine);
       }
 

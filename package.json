@@ -3,7 +3,7 @@
   "displayName": "الف",
   "publisher": "skepr",
   "description": "إضافة للغة الف مُنظمة للشفرة و مُشغلة لها و تختصر وقت الكتابة",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "icon": "imgs/AlifLogo.png",
   "main": "src/extension.js",
   "engines": {
@@ -143,5 +143,8 @@
   },
   "dependencies": {
     "sudo-prompt": "^9.2.1"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.6.0"
   }
 }

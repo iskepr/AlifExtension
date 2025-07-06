@@ -1,68 +1,68 @@
 {
-  "name": "Alif",
-  "fileTypes": ["alif", "الف"],
-  "scopeName": "source.alif",
-  "patterns": [
-    {
-      "name": "comment.line.number-sign.alif",
-      "begin": "#",
-      "end": "$",
-      "contentName": "comment.line.alif"
-    },
-    {
-      "name": "keyword.control.alif",
-      "match": "\\b(دالة|اذا|استورد|ارجع|اطبع|بينما|لاجل|استمر|توقف|احذف|اواذا|والا|صحيح|عشري|صنف|عام|ادخل|اقصى|ادنى|اصل|مدى)\\b"
-    },
-    {
-      "name": "constant.language.alif",
-      "match": "\\b(صح|خطأ|خطا)\\b"
-    },
-    {
-      "name": "string.quoted.formatted.alif",
-      "begin": "م\"",
-      "end": "\"",
-      "patterns": [
+    "name": "Alif",
+    "fileTypes": ["alif", "الف"],
+    "scopeName": "source.alif",
+    "patterns": [
         {
-          "name": "meta.embedded.line.alif",
-          "begin": "\\{",
-          "end": "\\}",
-          "patterns": [{ "include": "source.alif" }]
+            "name": "comment.line.number-sign.alif",
+            "begin": "#",
+            "end": "$",
+            "contentName": "comment.line.alif"
+        },
+        {
+            "name": "keyword.control.alif",
+            "match": "\\b\\s*(دالة|اذا|استورد|ارجع|اطبع|بينما|لاجل|استمر|توقف|احذف|اواذا|والا|صحيح|عشري|صنف|عام|ادخل|نهاية|حاول|خلل|مدى)\\s*\\b"
+        },
+        {
+            "name": "constant.language.alif",
+            "match": "\\b\\s*(صح|خطأ|خطا)\\s*\\b"
+        },
+        {
+            "name": "string.quoted.formatted.alif",
+            "begin": "م\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "meta.embedded.line.alif",
+                    "begin": "\\{",
+                    "end": "\\}",
+                    "patterns": [{ "include": "source.alif" }]
+                }
+            ]
+        },
+        {
+            "name": "string.quoted.double.alif",
+            "begin": "\"",
+            "end": "\""
+        },
+        {
+            "name": "string.quoted.single.alif",
+            "begin": "'",
+            "end": "'"
+        },
+        {
+            "name": "constant.numeric.alif",
+            "match": "-?\\b\\d+(\\.\\d+)?\\b"
+        },
+        {
+            "name": "constant.numeric.alif",
+            "match": "(?<=\\bدالة\\s+[ء-يA-Za-z0-9_]+\\s*\\()([^()،\n]+?)(?=(\\s*=|،|\\)))"
+        },
+        {
+            "name": "keyword.operator.alif",
+            "match": "\\+\\+=?|\\-\\-=?|\\*=|\\=|\\^=|\\\\=|==|!=|<=|>=|<|>|\\\\|\\+|-|\\*|\\^|=|و |او|\\bليس\\b"
+        },
+        {
+            "name": "support.function.builtin.alif",
+            "match": "\\b\\s+(مدى|صحيح|عشري|ادخل|نوع|طول|نص)\\s+\\b"
+        },
+        {
+            "name": "entity.name.function.alif",
+            "match": "\\b(\\.امسح|\\.ادرج|\\.هذا|\\.اضف|مفاتيح|[ء-يA-Za-z0-9_]+(?=\\([^)]*\\)))\\b"
+        },
+        {
+            "name": "variable.other.alif",
+            "match": "\\b[أ-ي]+_[أ-ي]+\\b"
         }
-      ]
-    },
-    {
-      "name": "string.quoted.double.alif",
-      "begin": "\"",
-      "end": "\""
-    },
-    {
-      "name": "string.quoted.single.alif",
-      "begin": "'",
-      "end": "'"
-    },
-    {
-      "name": "constant.numeric.alif",
-      "match": "-?\\b\\d+(\\.\\d+)?\\b"
-    },
-    {
-      "name": "constant.numeric.alif",
-      "match": "(?<=\\bدالة\\s+[ء-يA-Za-z0-9_]+\\s*\\()([^()،\n]+?)(?=(\\s*=|،|\\)))"
-    },
-    {
-      "name": "keyword.operator.alif",
-      "match": "\\+\\+=?|\\-\\-=?|\\*=|\\=|\\^=|\\\\=|==|!=|<=|>=|<|>|\\\\|\\+|-|\\*|\\^|=|و |او|\\bليس\\b"
-    },
-    {
-      "name": "support.function.builtin.alif",
-      "match": "\\b(مدى|صحيح|عشري|ادخل|نوع|طول|نص)\\b"
-    },
-    {
-      "name": "entity.name.function.alif",
-      "match": "\\b(\\.امسح|\\.ادرج|\\.هذا|\\.اضف|مفاتيح|[ء-يA-Za-z0-9_]+(?=\\([^)]*\\)))\\b"
-    },
-    {
-      "name": "variable.other.alif",
-      "match": "\\b[أ-ي]+_[أ-ي]+\\b"
-    }
-  ]
+    ]
 }

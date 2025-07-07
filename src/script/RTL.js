@@ -27,7 +27,7 @@ function detectWorkbenchCSS() {
     }
 
     console.warn(
-        "⚠️ لم يتم العثور على workbench.desktop.main.css تلقائيًا، سيتم استخدام المسار الافتراضي."
+        "لم يتم العثور على workbench.desktop.main.css تلقائيًا، سيتم استخدام المسار الافتراضي."
     );
     return path.join(appRoot, "vs", "workbench", "workbench.desktop.main.css");
 }
@@ -47,7 +47,7 @@ function injectCSS(callback) {
         const subject = workbench.subject;
 
         if (!fs.existsSync(subject)) {
-            console.error("❌ CSS file not found:", subject);
+            console.error("CSS file not found:", subject);
             callback?.(false);
             return;
         }
@@ -56,7 +56,7 @@ function injectCSS(callback) {
         try {
             originalCSS = fs.readFileSync(original, "utf8");
         } catch (err) {
-            console.warn("⚠️ Failed reading original file, trying sudo...");
+            console.warn("Failed reading original file, trying sudo...");
             return injectCSSWithSudo(callback);
         }
 
@@ -98,51 +98,46 @@ function injectCSSWithSudo(callback) {
             .replace(/\n/g, "`n")
             .replace(/"/g, '\\"');
         command = `powershell -Command "if (!(Get-Content '${original}' | Select-String -Pattern '${marker}')) { Add-Content -Path '${original}' -Value '\\n\\n${marker}\\n${escapedCSS}' }"`;
-    } else {
+    } else
         command = `
             if ! grep -q "${marker}" "${original}"; then
                 echo -e "\\n\\n${marker}\\n${cssToInject}" | sudo tee -a "${original}" > /dev/null;
             fi
         `;
-    }
 
     sudoPrompt.exec(command, { name: "VSCode RTL Support" }, (error) => {
         if (error) {
             console.error("Sudo injection failed:", error);
             callback?.(false);
-        } else {
-            callback?.(true);
-        }
+        } else callback?.(true);
     });
 }
 
-function registerRTLStyles() {
+function registerRTLStyles(context) {
     function activate() {
         injectCSS((success) => {
             if (success) {
                 vscode.window
                     .showInformationMessage(
-                        "تم تفعيل دعم النص من اليمين الى اليسار بنجاح. أعد تشغيل VSCode لتطبيق التغيير.",
+                        "تم تفعيل دعم النص من اليمين الى اليسار بنجاح. أعد تشغيل لتطبيق التغيير.",
                         "اعادة تشغيل"
                     )
                     .then((action) => {
-                        if (action === "اعادة تشغيل") {
+                        context.globalState.update("rtlMessageShown", true);
+                        if (action === "اعادة تشغيل")
                             vscode.commands.executeCommand(
                                 "workbench.action.reloadWindow"
                             );
-                        }
                     });
-            } else {
+            } else
                 vscode.window.showErrorMessage(
                     "فشل تفعيل دعم النص من اليمين الى اليسار."
                 );
-            }
         });
     }
-    activate();
-    return vscode.commands.registerCommand("rtl-alif.rtl", () => {
-        activate();
-    });
+
+    if (!context.globalState.get("rtlMessageShown", false)) activate();
+    return vscode.commands.registerCommand("rtl-alif.rtl", () => activate());
 }
 
 module.exports = registerRTLStyles;

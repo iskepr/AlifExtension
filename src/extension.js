@@ -12,7 +12,7 @@ function activate(context) {
   context.subscriptions.push(registerFormatter());
   context.subscriptions.push(registerAutoImport(context));
   context.subscriptions.push(showAllWords(context));
-  context.subscriptions.push(registerRTLStyles());
+  context.subscriptions.push(registerRTLStyles(context));
   registerDiagnostics(context);
 }
 

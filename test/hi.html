@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>محرر موناكو</title>
+    <style>
+        .monaco-editor .lines-content * {
+            direction: rtl;
+            text-align: right;
+        }
+
+        #container {
+            width: 100%;
+            max-width: 100%;
+            height: 80vh;
+            border: 1px solid #333;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .monaco-editor,
+        .monaco-editor .view-line {
+            width: 100% !important;
+            max-width: 98% !important;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 0 0 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>محرر موناكو مع دعم اللغة العربية</h1>
+    <div id="container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs/loader.min.js"></script>
+    <script>
+        require.config({
+            paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.52.2/min/vs' }
+        });
+
+        require(['vs/editor/editor.main'], function () {
+            let editor = monaco.editor.create(document.getElementById('container'), {
+                value: [
+                    'دالة محمد():',
+                    '    طباعة("مرحباً محمد!")',
+                    '	الطريقة_التلقائي = طريقة_الحساب اذا الطرق[طريقة_الحساب] !== "عدم" والا الطريقة_التلقائي'
+                ].join('\n'),
+                language: 'python',
+                theme: 'vs-dark',
+                fontSize: 16,
+                lineNumbers: 'on',
+                minimap: { enabled: true },
+                scrollBeyondLastLine: false,
+                tabSize: 4,
+            });
+        });
+    </script>
+</body>
+
+</html>

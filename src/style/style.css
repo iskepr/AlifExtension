@@ -4,13 +4,8 @@
 }
 .editor-instance[aria-label*=".alif"] .monaco-editor,
 .editor-instance[aria-label*=".الف"] .monaco-editor,
-.editor-instance[aria-label*=".alif"] .monaco-editor .lines-content,
-.editor-instance[aria-label*=".الف"] .monaco-editor .lines-content,
 .editor-instance[aria-label*=".alif"] .monaco-editor .view-line,
-.editor-instance[aria-label*=".الف"] .monaco-editor .view-line,
-.editor-instance[aria-label*=".alif"] .monaco-editor .view-lines,
-.editor-instance[aria-label*=".الف"] .monaco-editor .view-lines,
-.editor-instance[aria-label*=".alif"] .monaco-editor .margin {
+.editor-instance[aria-label*=".الف"] .monaco-editor .view-line {
     width: 100% !important;
     max-width: 98% !important;
 }

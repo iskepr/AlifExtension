@@ -15,7 +15,11 @@
     "keywords": [
         "alif",
         "aliflang",
-        "الف"
+        "الف",
+        "arabic",
+        "ar",
+        "arabic programming language",
+        "rtl"
     ],
     "categories": [
         "Programming Languages",
@@ -33,22 +37,9 @@
                 "icon": "$(run)"
             },
             {
-                "command": "rtl-alif.active",
-                "title": "تفعيل من اليمين لليسار"
-            },
-            {
-                "command": "rtl-alif.deactive",
-                "title": "إلغاء تفعيل من اليمين لليسار"
-            },
-            {
                 "command": "rtl-alif.rtl",
                 "title": "من اليمين لليسار",
                 "icon": "$(debug-step-over)"
-            },
-            {
-                "command": "rtl-alif.ltr",
-                "title": "من اليسار لليمين",
-                "icon": "$(debug-step-back)"
             }
         ],
         "iconThemes": [

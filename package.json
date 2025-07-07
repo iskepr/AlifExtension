@@ -1,150 +1,144 @@
 {
-  "name": "aliflang",
-  "displayName": "الف",
-  "publisher": "skepr",
-  "description": "إضافة للغة الف مُنظمة للشفرة و مُشغلة لها و تختصر وقت الكتابة",
-  "version": "0.6.3",
-  "icon": "imgs/AlifLogo.png",
-  "main": "src/extension.js",
-  "engines": {
-    "vscode": "^1.50.0"
-  },
-  "activationEvents": [
-    "onDebug"
-  ],
-  "keywords": [
-    "alif",
-    "aliflang",
-    "الف"
-  ],
-  "categories": [
-    "Programming Languages",
-    "Snippets",
-    "Formatters",
-    "Debuggers",
-    "Linters",
-    "Themes"
-  ],
-  "contributes": {
-    "commands": [
-      {
-        "command": "alif.runCode",
-        "title": "تشغيل الف",
-        "icon": "$(run)"
-      },
-      {
-        "command": "rtl-alif.active",
-        "title": "تفعيل من اليمين لليسار"
-      },
-      {
-        "command": "rtl-alif.deactive",
-        "title": "إلغاء تفعيل من اليمين لليسار"
-      },
-      {
-        "command": "rtl-alif.rtl",
-        "title": "من اليمين لليسار",
-        "icon": "$(debug-step-over)"
-      },
-      {
-        "command": "rtl-alif.ltr",
-        "title": "من اليسار لليمين",
-        "icon": "$(debug-step-back)"
-      }
+    "name": "aliflang",
+    "displayName": "الف",
+    "publisher": "skepr",
+    "description": "إضافة للغة الف مُنظمة للشفرة و مُشغلة لها و تختصر وقت الكتابة",
+    "version": "0.6.4",
+    "icon": "imgs/AlifLogo.png",
+    "main": "src/extension.js",
+    "engines": {
+        "vscode": "^1.50.0"
+    },
+    "activationEvents": [
+        "onDebug"
     ],
-    "iconThemes": [
-      {
-        "id": "alif",
-        "label": "Alif Icons",
-        "path": "src/fileIcons.json"
-      }
+    "keywords": [
+        "alif",
+        "aliflang",
+        "الف"
     ],
-    "languages": [
-      {
-        "id": "alif",
-        "aliases": [
-          "Alif",
-          "aliflib",
-          "الف"
+    "categories": [
+        "Programming Languages",
+        "Snippets",
+        "Formatters",
+        "Debuggers",
+        "Linters",
+        "Themes"
+    ],
+    "contributes": {
+        "commands": [
+            {
+                "command": "alif.runCode",
+                "title": "تشغيل الف",
+                "icon": "$(run)"
+            },
+            {
+                "command": "rtl-alif.active",
+                "title": "تفعيل من اليمين لليسار"
+            },
+            {
+                "command": "rtl-alif.deactive",
+                "title": "إلغاء تفعيل من اليمين لليسار"
+            },
+            {
+                "command": "rtl-alif.rtl",
+                "title": "من اليمين لليسار",
+                "icon": "$(debug-step-over)"
+            },
+            {
+                "command": "rtl-alif.ltr",
+                "title": "من اليسار لليمين",
+                "icon": "$(debug-step-back)"
+            }
         ],
-        "extensions": [
-          ".alif",
-          ".aliflib",
-          ".الف"
+        "iconThemes": [
+            {
+                "id": "alif",
+                "label": "Alif Icons",
+                "path": "src/fileIcons.json"
+            }
         ],
-        "configuration": "./language-configuration.json"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "alif",
-        "scopeName": "source.alif",
-        "path": "./src/syntaxes/alif.tmLanguage.json"
-      }
-    ],
-    "keybindings": [
-      {
-        "command": "alif.runCode",
-        "key": "alt+shift+r",
-        "mac": "alt+shift+r",
-        "when": "editorLangId == alif"
-      }
-    ],
-    "menus": {
-      "editor/title/run": [
-        {
-          "command": "alif.runCode",
-          "when": "editorLangId == alif",
-          "group": "navigation"
-        }
-      ],
-      "editor/context": [
-        {
-          "command": "alif.runCode",
-          "when": "editorLangId == alif",
-          "group": "navigation"
-        }
-      ],
-      "editor/title": [
-        {
-          "when": "resourceLangId == alif && resourceFilename =~ /^(?:.*(\\.rtl\\.alif)).*$/",
-          "command": "rtl-alif.ltr",
-          "group": "1_run"
+        "languages": [
+            {
+                "id": "alif",
+                "aliases": [
+                    "Alif",
+                    "aliflib",
+                    "الف"
+                ],
+                "extensions": [
+                    ".alif",
+                    ".aliflib",
+                    ".الف"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "alif",
+                "scopeName": "source.alif",
+                "path": "./src/syntaxes/alif.tmLanguage.json"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "alif.runCode",
+                "key": "alt+shift+r",
+                "mac": "alt+shift+r",
+                "when": "editorLangId == alif"
+            }
+        ],
+        "menus": {
+            "editor/title/run": [
+                {
+                    "command": "alif.runCode",
+                    "when": "editorLangId == alif",
+                    "group": "navigation"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "alif.runCode",
+                    "when": "editorLangId == alif",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "rtl-alif.rtl",
+                    "group": "1_run"
+                }
+            ]
         },
-        {
-          "when": "resourceLangId == alif && resourceFilename =~ /^(?!.*(\\.rtl\\.alif)).*$/",
-          "command": "rtl-alif.rtl",
-          "group": "1_run"
-        }
-      ]
+        "snippets": [
+            {
+                "language": "alif",
+                "path": "./src/snippets/alif.json"
+            }
+        ],
+        "configurationDefaults": {
+            "[alif]": {
+                "editor.minimap.enabled": false
+            }
+        },
+        "alif.previewScripts": [
+            "./src/script/preview.js"
+        ]
     },
-    "snippets": [
-      {
-        "language": "alif",
-        "path": "./src/snippets/alif.json"
-      }
-    ],
-    "configurationDefaults": {
-      "[alif]": {
-        "editor.minimap.enabled": false
-      }
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
+        "test": "vscode-test"
     },
-    "alif.previewScripts": [
-      "./src/script/preview.js"
-    ]
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "vscode-test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iskepr/AlifExtension.git"
-  },
-  "dependencies": {
-    "sudo-prompt": "^9.2.1"
-  },
-  "devDependencies": {
-    "@vscode/vsce": "^3.6.0"
-  }
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/iskepr/AlifExtension.git"
+    },
+    "dependencies": {
+        "sudo-prompt": "^9.2.1"
+    },
+    "devDependencies": {
+        "@vscode/vsce": "^3.6.0"
+    }
 }

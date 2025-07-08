@@ -3,7 +3,7 @@
     "displayName": "الف",
     "publisher": "skepr",
     "description": "إضافة للغة الف مُنظمة للشفرة و مُشغلة لها و تختصر وقت الكتابة",
-    "version": "0.6.4",
+    "version": "0.6.6",
     "icon": "imgs/AlifLogo.png",
     "main": "src/extension.js",
     "engines": {
@@ -85,20 +85,21 @@
                 {
                     "command": "alif.runCode",
                     "when": "editorLangId == alif",
-                    "group": "navigation"
+                    "group": "0_run"
                 }
             ],
             "editor/context": [
                 {
                     "command": "alif.runCode",
                     "when": "editorLangId == alif",
-                    "group": "navigation"
+                    "group": "0_run"
                 }
             ],
             "editor/title": [
                 {
                     "command": "rtl-alif.rtl",
-                    "group": "1_run"
+                    "when": "editorLangId == alif",
+                    "group": "0_alif"
                 }
             ]
         },

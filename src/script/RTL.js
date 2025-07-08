@@ -42,37 +42,54 @@ const workbench = {
 };
 
 function injectCSS(callback) {
-    try {
-        const original = workbench.path.original;
-        const subject = workbench.subject;
+    const original = workbench.path.original;
+    const subject = workbench.subject;
 
-        if (!fs.existsSync(subject)) {
-            console.error("CSS file not found:", subject);
-            callback?.(false);
-            return;
-        }
-
-        let originalCSS;
-        try {
-            originalCSS = fs.readFileSync(original, "utf8");
-        } catch (err) {
-            console.warn("Failed reading original file, trying sudo...");
-            return injectCSSWithSudo(callback);
-        }
-
-        if (originalCSS.includes("/* دعم النص من اليمين الى اليسار */")) {
-            callback?.(true);
-            return;
-        }
-
-        const cssToInject = fs.readFileSync(subject, "utf8");
-        const injectedCSS = `${originalCSS}\n\n/* دعم النص من اليمين الى اليسار */\n${cssToInject}`;
-
-        fs.writeFileSync(original, injectedCSS);
-        callback?.(true);
-    } catch (error) {
-        console.error("Error injecting CSS:", error);
+    if (!fs.existsSync(subject)) {
+        console.error("CSS file not found:", subject);
         callback?.(false);
+        return;
+    }
+
+    const marker = "/* دعم النص من اليمين الى اليسار */";
+
+    let originalCSS;
+    try {
+        originalCSS = fs.readFileSync(original, "utf8");
+    } catch (err) {
+        console.warn("فشل قراءة الملف. هنطلب صلاحية sudo...");
+        return injectCSSWithSudo(callback);
+    }
+
+    const cssToInject = fs.readFileSync(subject, "utf8");
+
+    // نشوف هل فعلاً الـ CSS موجود أصلاً ولا لأ
+    const normalizedOriginal = originalCSS.replace(/\\\./g, "."); // لو حد استخدم \. نرجعها .
+    const normalizedInject = cssToInject.replace(/\\\./g, ".");
+
+    if (
+        normalizedOriginal.includes(marker) ||
+        normalizedOriginal.includes(normalizedInject)
+    ) {
+        console.log("CSS موجود بالفعل. مش هنضيفه تاني.");
+        callback?.(true);
+        return;
+    }
+
+    const injectedCSS = `${originalCSS}\n\n${marker}\n${cssToInject}`;
+
+    try {
+        fs.writeFileSync(original, injectedCSS);
+        console.log("تم حقن CSS بنجاح.");
+        callback?.(true);
+    } catch (err) {
+        if (err.code === "EACCES") {
+            console.warn("فشل الكتابة بدون صلاحيات. هنطلب sudo...");
+            injectCSSWithSudo(callback);
+        } else {
+            console.error("Error injecting CSS:", err);
+            callback?.(false);
+        }
     }
 }
 

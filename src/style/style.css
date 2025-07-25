@@ -9,3 +9,18 @@
     width: 100% !important;
     max-width: 98% !important;
 }
+
+/* شفافية */
+textarea,
+input,
+.find-widget,
+.widget-toolbar,
+.notification-list-item,
+.findMatchInline {
+    backdrop-filter: blur(5px);
+    border-radius: 10%;
+    background: transparent;
+}
+.findMatchInline {
+    border-radius: 10%;
+}

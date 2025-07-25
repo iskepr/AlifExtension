@@ -3,7 +3,7 @@
     "displayName": "الف",
     "publisher": "skepr",
     "description": "إضافة للغة الف مُنظمة للشفرة و مُشغلة لها و تختصر وقت الكتابة",
-    "version": "0.6.6",
+    "version": "0.6.7",
     "icon": "imgs/AlifLogo.png",
     "main": "src/extension.js",
     "engines": {
@@ -47,6 +47,13 @@
                 "id": "alif",
                 "label": "Alif Icons",
                 "path": "src/fileIcons.json"
+            }
+        ],
+        "themes": [
+            {
+                "label": "ثيم الف الليلي",
+                "uiTheme": "vs-dark",
+                "path": "./src/themes/AlifDark.json"
             }
         ],
         "languages": [
